@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Camperdown Cemetery Guide</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Camperdown Cemetery Guide</string>
+    <string name="overview_title">Overview</string>
+    <string name="map_title">Map</string>
+    <string name="sitelist_title">Sites</string>
+</resources>
