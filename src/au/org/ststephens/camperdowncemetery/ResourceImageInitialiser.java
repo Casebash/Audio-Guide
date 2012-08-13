@@ -3,7 +3,7 @@ package au.org.ststephens.camperdowncemetery;
 import android.widget.ImageView;
 
 public class ResourceImageInitialiser extends ImageInitialiser{
-	int imageResource;
+	private int imageResource;
 	
 	public ResourceImageInitialiser(int imageResource){
 		this.imageResource=imageResource;
