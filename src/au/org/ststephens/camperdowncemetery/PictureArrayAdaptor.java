@@ -1,5 +1,7 @@
 package au.org.ststephens.camperdowncemetery;
 
+import java.util.List;
+
 import android.content.Context;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -12,9 +14,9 @@ import android.widget.TextView;
 //Based off http://www.mkyong.com/android/android-listview-example/
 public class PictureArrayAdaptor extends ArrayAdapter<Pair<String, ImageInitialiser>> {
 	private final Context context;
-	private final Pair<String, ImageInitialiser>[] values;
+	private final List<Pair<String, ImageInitialiser>> values;
  
-	public PictureArrayAdaptor(Context context, Pair<String, ImageInitialiser>[] values) {
+	public PictureArrayAdaptor(Context context, List<Pair<String, ImageInitialiser>> values) {
 		super(context, R.layout.picture_list, values);
 		this.context = context;
 		this.values = values;
@@ -27,7 +29,7 @@ public class PictureArrayAdaptor extends ArrayAdapter<Pair<String, ImageInitiali
 		View rowView = inflater.inflate(R.layout.picture_list, parent, false);
 		TextView textView = (TextView) rowView.findViewById(R.id.label);
 		ImageView imageView = (ImageView) rowView.findViewById(R.id.logo);
-		Pair<String, ImageInitialiser> data=this.values[position];
+		Pair<String, ImageInitialiser> data=this.values.get(position);
 		textView.setText(data.first);
 		data.second.initialiseImage(imageView);
 		return rowView;

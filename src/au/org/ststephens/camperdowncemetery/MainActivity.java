@@ -1,8 +1,11 @@
 package au.org.ststephens.camperdowncemetery;
 
+import java.util.ArrayList;
+
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Pair;
 import android.view.Menu;
 import android.widget.ListView;
 import android.widget.TabHost;
@@ -36,10 +39,13 @@ public class MainActivity extends FragmentActivity{
         spec3.setIndicator(r.getString(R.string.map_title));
         tabs.addTab(spec3);
         
-        //Display the list
+        //Display the list  
         ListView siteListTable=(ListView) findViewById(R.id.sitelist);
-        //Set to something other than null
-        siteListTable.setAdapter(new PictureArrayAdaptor(this, null));      
+        
+		ArrayList<Pair<String, ImageInitialiser>> tableData = new ArrayList<Pair<String, ImageInitialiser>>();
+		tableData.add(new Pair<String, ImageInitialiser>("A", new ResourceImageInitialiser(R.drawable.sample1)));
+		tableData.add(new Pair<String, ImageInitialiser>("B", new ResourceImageInitialiser(R.drawable.sample2)));
+        siteListTable.setAdapter(new PictureArrayAdaptor(this, tableData));
     }
 
     @Override
