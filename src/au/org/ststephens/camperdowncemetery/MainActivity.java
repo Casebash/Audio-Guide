@@ -18,6 +18,7 @@ public class MainActivity extends FragmentActivity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MyApplication app=(MyApplication)getApplication();
         
         Resources r=getResources();
         TabHost tabs = (TabHost)findViewById(R.id.tabhost);
@@ -40,13 +41,9 @@ public class MainActivity extends FragmentActivity{
         
         //Display the list 
         ListView siteListTable=(ListView) findViewById(R.id.sitelist);       
-        Site tableData[] = {
-        	new Site("A", "a is here", new ResourceImageInitialiser(R.drawable.sample1)),
-        	new Site("B", "b is here", new ResourceImageInitialiser(R.drawable.sample2))
-        };
-		PictureArrayAdapter adapter=new PictureArrayAdapter(this, tableData);
+		SiteAdapter adapter=new SiteAdapter(this, app.getTableData());
         siteListTable.setAdapter(adapter);
-        siteListTable.setOnItemClickListener(new SiteListener(tableData));
+        siteListTable.setOnItemClickListener(new SiteListener());
     }
 
     @Override

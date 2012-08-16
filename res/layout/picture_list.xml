@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- //Based off http://www.mkyong.com/android/android-listview-example/  -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:padding="5sp" >
  
     <ImageView
         android:id="@+id/logo"
+        android:importantForAccessibility="no"
+        android:contentDescription="@null"
         android:layout_width="30sp"
         android:layout_height="30sp"
         android:layout_marginLeft="5sp"
@@ -16,7 +18,7 @@
  
     <TextView
         android:id="@+id/label"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@+id/label"
         android:textSize="24sp" >

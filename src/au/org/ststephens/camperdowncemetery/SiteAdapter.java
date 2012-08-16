@@ -12,10 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 //Based off http://www.mkyong.com/android/android-listview-example/
-public class PictureArrayAdapter extends ArrayAdapter<Site>{
+public class SiteAdapter extends ArrayAdapter<Site>{
 	private final Context context;
  
-	public PictureArrayAdapter(Context context, Site values[]) {
+	public SiteAdapter(Context context, Site values[]) {
 		super(context, R.layout.picture_list, values);
 		this.context = context;
 	}

@@ -8,9 +8,10 @@ import android.widget.TextView;
 public class SiteActivity extends FragmentActivity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent=getIntent();
+        setTitle(intent.getStringExtra("test"));
         setContentView(R.layout.text);
         TextView v=(TextView) findViewById(R.id.textView1);
-        Intent intent=getIntent();
         v.setText(intent.getStringExtra("test"));
     }
 }

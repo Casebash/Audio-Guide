@@ -7,16 +7,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class SiteListener implements OnItemClickListener{
-	private Site[] sites;
-	
-	public SiteListener(Site[] sites){
-		this.sites=sites;
-	}
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
 		Intent intent = new Intent(view.getContext(), SiteActivity.class);
-		intent.putExtra("test", sites[position].description);
+		intent.putExtra("id", position);
 		view.getContext().startActivity(intent);
 	}
 }
