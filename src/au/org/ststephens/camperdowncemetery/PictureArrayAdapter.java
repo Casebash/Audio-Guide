@@ -1,25 +1,23 @@
 package au.org.ststephens.camperdowncemetery;
 
-import java.util.List;
-
 import android.content.Context;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 //Based off http://www.mkyong.com/android/android-listview-example/
-public class PictureArrayAdaptor extends ArrayAdapter<Pair<String, ImageInitialiser>> {
+public class PictureArrayAdapter extends ArrayAdapter<Site>{
 	private final Context context;
-	private final List<Pair<String, ImageInitialiser>> values;
  
-	public PictureArrayAdaptor(Context context, List<Pair<String, ImageInitialiser>> values) {
+	public PictureArrayAdapter(Context context, Site values[]) {
 		super(context, R.layout.picture_list, values);
 		this.context = context;
-		this.values = values;
 	}
  
 	@Override
@@ -29,9 +27,9 @@ public class PictureArrayAdaptor extends ArrayAdapter<Pair<String, ImageInitiali
 		View rowView = inflater.inflate(R.layout.picture_list, parent, false);
 		TextView textView = (TextView) rowView.findViewById(R.id.label);
 		ImageView imageView = (ImageView) rowView.findViewById(R.id.logo);
-		Pair<String, ImageInitialiser> data=this.values.get(position);
-		textView.setText(data.first);
-		data.second.initialiseImage(imageView);
+		Site site=getItem(position);
+		textView.setText(site.title);
+		site.mainInitialiser.initialiseImage(imageView);
 		return rowView;
 	}
 }

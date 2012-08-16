@@ -7,11 +7,10 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Pair;
 import android.view.Menu;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TableLayout;
-
-
 
 public class MainActivity extends FragmentActivity{
 
@@ -39,13 +38,15 @@ public class MainActivity extends FragmentActivity{
         spec3.setIndicator(r.getString(R.string.map_title));
         tabs.addTab(spec3);
         
-        //Display the list  
-        ListView siteListTable=(ListView) findViewById(R.id.sitelist);
-        
-		ArrayList<Pair<String, ImageInitialiser>> tableData = new ArrayList<Pair<String, ImageInitialiser>>();
-		tableData.add(new Pair<String, ImageInitialiser>("A", new ResourceImageInitialiser(R.drawable.sample1)));
-		tableData.add(new Pair<String, ImageInitialiser>("B", new ResourceImageInitialiser(R.drawable.sample2)));
-        siteListTable.setAdapter(new PictureArrayAdaptor(this, tableData));
+        //Display the list 
+        ListView siteListTable=(ListView) findViewById(R.id.sitelist);       
+        Site tableData[] = {
+        	new Site("A", "a is here", new ResourceImageInitialiser(R.drawable.sample1)),
+        	new Site("B", "b is here", new ResourceImageInitialiser(R.drawable.sample2))
+        };
+		PictureArrayAdapter adapter=new PictureArrayAdapter(this, tableData);
+        siteListTable.setAdapter(adapter);
+        siteListTable.setOnItemClickListener(new SiteListener(tableData));
     }
 
     @Override
