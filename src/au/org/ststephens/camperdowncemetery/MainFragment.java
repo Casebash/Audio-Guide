@@ -13,7 +13,7 @@ public class MainFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View mainView = inflater.inflate(R.layout.fragment_main, container,
+		View mainView = inflater.inflate(R.layout.main_fragment, container,
 				false);
 
 		MyApplication app = (MyApplication) getActivity().getApplication();
