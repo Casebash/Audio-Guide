@@ -1,6 +1,7 @@
 package au.org.ststephens.camperdowncemetery;
 
 import android.app.Application;
+import au.org.ststephens.camperdowncemetery.util.ResourceImageInitialiser;
 
 public class MyApplication extends Application{
 	private Site siteList[] = {

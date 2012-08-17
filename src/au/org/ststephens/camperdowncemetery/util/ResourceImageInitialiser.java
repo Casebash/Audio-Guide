@@ -1,4 +1,4 @@
-package au.org.ststephens.camperdowncemetery;
+package au.org.ststephens.camperdowncemetery.util;
 
 import android.widget.ImageView;
 

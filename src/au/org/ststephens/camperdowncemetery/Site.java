@@ -1,5 +1,7 @@
 package au.org.ststephens.camperdowncemetery;
 
+import au.org.ststephens.camperdowncemetery.util.ImageInitialiser;
+
 public class Site {
 	public int id;
 	public String title;
