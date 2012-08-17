@@ -9,9 +9,11 @@ public class SiteActivity extends FragmentActivity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent=getIntent();
-        setTitle(intent.getStringExtra("test"));
+        MyApplication app=(MyApplication) getApplication();
+        Site s=app.getSiteById(intent.getIntExtra("id", -1));
+        setTitle(s.title);
         setContentView(R.layout.text);
         TextView v=(TextView) findViewById(R.id.textView1);
-        v.setText(intent.getStringExtra("test"));
+        v.setText(s.description);
     }
 }

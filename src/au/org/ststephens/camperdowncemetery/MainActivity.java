@@ -41,7 +41,7 @@ public class MainActivity extends FragmentActivity{
         
         //Display the list 
         ListView siteListTable=(ListView) findViewById(R.id.sitelist);       
-		SiteAdapter adapter=new SiteAdapter(this, app.getTableData());
+		SiteAdapter adapter=new SiteAdapter(this, app.getSites());
         siteListTable.setAdapter(adapter);
         siteListTable.setOnItemClickListener(new SiteListener());
     }
