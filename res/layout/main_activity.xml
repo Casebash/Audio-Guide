@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
     <fragment
         android:id="@+id/main_fragment"
-        android:layout_width="fill_parent"
+        android:layout_width="0px"
         android:layout_height="fill_parent"
         class="au.org.ststephens.camperdowncemetery.MainFragment" />
-</LinearLayout>
+</FrameLayout>
+

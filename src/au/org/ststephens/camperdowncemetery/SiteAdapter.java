@@ -15,8 +15,8 @@ import android.widget.TextView;
 public class SiteAdapter extends ArrayAdapter<Site>{
 	private final Context context;
  
-	public SiteAdapter(Context context, Site values[]) {
-		super(context, R.layout.picture_list, values);
+	public SiteAdapter(Context context, int layout, Site values[]) {
+		super(context, layout==0? R.layout.picture_list:layout, values);
 		this.context = context;
 	}
  

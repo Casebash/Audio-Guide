@@ -5,5 +5,5 @@
     <string name="title_activity_main">Camperdown Cemetery Guide</string>
     <string name="overview_title">Overview</string>
     <string name="map_title">Map</string>
-    <string name="sitelist_title">Sites</string>
+    <string name="site_list_title">Sites</string>
 </resources>
