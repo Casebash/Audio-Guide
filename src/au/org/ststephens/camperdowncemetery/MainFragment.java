@@ -24,8 +24,7 @@ public class MainFragment extends Fragment implements OnItemClickListener{
     }
     
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View mainView = inflater.inflate(R.layout.main_tabs, container);
 
 		Resources r = getResources();
@@ -53,7 +52,6 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 		SiteAdapter adapter = new SiteAdapter(getActivity(), 0, MyApplication.getApp().getSites());
 		siteListTable.setAdapter(adapter);
 		siteListTable.setOnItemClickListener(this);
-		Log.e("", ""+siteListTable);
 		return mainView;
 	}
 	
@@ -63,7 +61,6 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 		super.onActivityCreated(savedInstanceState);
 		View detailsFrame = getActivity().findViewById(R.id.site_info_main);
         mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
-        Log.e("Duel", ""+mDualPane);
 
         if (savedInstanceState != null) {
             mCurCheckPosition = savedInstanceState.getInt("curChoice", 0);
@@ -106,7 +103,6 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 
 	@Override
 	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-		Log.w("a", ""+position);
 		showSite(position);
 	}
 }

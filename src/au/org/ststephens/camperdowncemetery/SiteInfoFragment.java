@@ -37,7 +37,7 @@ public class SiteInfoFragment extends Fragment {
             return null;
         }
 		
-		View siteView = inflater.inflate(R.layout.text, container, false);
+		View siteView = inflater.inflate(R.layout.site_info, container, false);
 		TextView textView = (TextView) siteView.findViewById(R.id.textView1);
 		textView.setText(site.description);
 		return siteView;

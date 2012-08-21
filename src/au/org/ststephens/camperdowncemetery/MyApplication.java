@@ -7,7 +7,7 @@ public class MyApplication extends Application{
 	private static MyApplication app;
 	
 	private Site siteList[] = {
-    	new Site("A", "a is here", new ResourceImageInitialiser(R.drawable.sample1), 0),
+    	new Site("A", "a is here\nne\nne\nne\nne\nne\nne\nne\nne\nne\nne\nne\nne\nne\nne\nnaa\nnnnaa\nnnnaa\nnnnaa\nnnnaa\nnnnaa\nnnnaa\nnnnaa\nn", new ResourceImageInitialiser(R.drawable.sample1), 0),
     	new Site("B", "b is here", new ResourceImageInitialiser(R.drawable.sample2), 1)
     };
 	
