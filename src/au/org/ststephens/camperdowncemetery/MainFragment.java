@@ -5,14 +5,17 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TabHost;
 
 //Based off example towards end of fragments - http://developer.android.com/guide/components/fragments.html
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements OnItemClickListener{
 	boolean mDualPane;
     int mCurCheckPosition = 0;
 	
@@ -23,8 +26,7 @@ public class MainFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View mainView = inflater.inflate(R.layout.main_fragment, container,
-				false);
+		View mainView = inflater.inflate(R.layout.main_tabs, container);
 
 		Resources r = getResources();
 		//Create tabs
@@ -46,21 +48,22 @@ public class MainFragment extends Fragment {
 		spec3.setIndicator(r.getString(R.string.map_title));
 		tabs.addTab(spec3);
 
-		// Display the list
-		ListView siteListTable = (ListView) mainView
-				.findViewById(R.id.site_list);
+		//Prepare the site list
+		ListView siteListTable = (ListView) mainView.findViewById(R.id.site_list);
 		SiteAdapter adapter = new SiteAdapter(getActivity(), 0, MyApplication.getApp().getSites());
 		siteListTable.setAdapter(adapter);
-		siteListTable.setOnItemClickListener(new SiteListener());
+		siteListTable.setOnItemClickListener(this);
+		Log.e("", ""+siteListTable);
 		return mainView;
 	}
 	
 	//Instantiate other view if we need to
-	/*@Override
+	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		View detailsFrame = getActivity().findViewById(R.id.site_info_main);
         mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
+        Log.e("Duel", ""+mDualPane);
 
         if (savedInstanceState != null) {
             mCurCheckPosition = savedInstanceState.getInt("curChoice", 0);
@@ -68,8 +71,8 @@ public class MainFragment extends Fragment {
 
         if (mDualPane) {
             findListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-=            showSite(mCurCheckPosition);
-        }	
+            showSite(mCurCheckPosition);
+        }
 	}
 	
 	public void showSite(int siteIndex){
@@ -82,11 +85,9 @@ public class MainFragment extends Fragment {
 
             SiteInfoFragment details = (SiteInfoFragment)
                     getFragmentManager().findFragmentById(R.id.site_info_main);
-            if (details == null || details.getShownId() != s.id) {
+            if (details == null || details.getSite().id != s.id) {
                 // Make new fragment to show this selection.
-                details = SiteInfoFragment.newInstance(s.description);
-                
-                //Replace fragment
+                details = SiteInfoFragment.newInstance(s.id);
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.site_info_main, details);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -97,9 +98,15 @@ public class MainFragment extends Fragment {
             // Otherwise we need to launch a new activity to display
             // the dialog fragment with selected text.
             Intent intent = new Intent();
-            intent.setClass(getActivity(), DetailsActivity.class);
-            intent.putExtra("index", index);
+            intent.setClass(getActivity(), SiteInfoActivity.class);
+            intent.putExtra("id", s.id);
             startActivity(intent);
         }
-	}*/
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
+		Log.w("a", ""+position);
+		showSite(position);
+	}
 }

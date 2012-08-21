@@ -24,7 +24,8 @@ public class MyApplication extends Application{
         super.onCreate();
         MyApplication.app = (MyApplication) getApplicationContext();
     }
-
+    
+    //Only call after onCreate
     public static MyApplication getApp() {
         return MyApplication.app;
     }
