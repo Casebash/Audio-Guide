@@ -1,0 +1,4 @@
+* Highlighting
+* Multiple images
+* Map
+* Play multi-media

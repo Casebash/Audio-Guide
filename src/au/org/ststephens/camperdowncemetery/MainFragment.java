@@ -65,6 +65,7 @@ public class MainFragment extends Fragment implements OnItemClickListener{
         if (savedInstanceState != null) {
             mCurCheckPosition = savedInstanceState.getInt("curChoice", 0);
         }
+        
 
         if (mDualPane) {
             findListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
