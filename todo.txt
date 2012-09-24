@@ -1,4 +1,3 @@
-* Highlighting
 * Multiple images
 * Map
-* Play multi-media
+* Media player overlay issues - button to listen! Back doesn't work!

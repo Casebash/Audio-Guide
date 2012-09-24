@@ -6,4 +6,5 @@
     <string name="overview_title">Overview</string>
     <string name="map_title">Map</string>
     <string name="site_list_title">Sites</string>
+    <string name="show_controls">Audio controls</string>
 </resources>

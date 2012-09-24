@@ -1,6 +1,7 @@
 package au.org.ststephens.camperdowncemetery;
 
 import android.content.res.Configuration;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
@@ -12,6 +13,7 @@ public class SiteInfoActivity extends FragmentActivity{
             finish();
             return;
         }
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
         if (savedInstanceState == null) {
             // During initial setup, plug in the details fragment.
         	SiteInfoFragment frag=SiteInfoFragment.newInstance(getIntent().getIntExtra("id", 0));

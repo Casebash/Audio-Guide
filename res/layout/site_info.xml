@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	<LinearLayout
+	    xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
 		android:orientation="vertical">	
-		<ImageView
+	
+	 	<ImageView
 		    android:layout_width="fill_parent"
 		    android:layout_height="0px"
 		    android:layout_weight="1"
 		    android:src="@drawable/huge_test_photo"
 		    android:scaleType="fitCenter"
 		    android:contentDescription="@null"
+		    android:layout_margin="8dp"
 		    />
-	
-	    <TextView 
+	    
+	    <TextView
 	        android:id="@+id/textView1"
+	        android:layout_margin="8dp"
 	        android:layout_width="fill_parent"
 	        android:layout_height="0px"
-	        android:layout_weight="3"/>
-    </LinearLayout>
+	        android:layout_weight="3"
+	        android:scrollbars="vertical"/>
+	    <TextView
+	        android:id="@+id/audio_controls_show"
+	        android:layout_height="wrap_content"
+	        android:layout_width="fill_parent"
+	        android:text="@string/show_controls"
+	        android:textSize="18dp"
+	        android:gravity="center_horizontal"
+	        android:background="#525252"
+	        android:textColor="@android:color/white"
+	        android:visibility="invisible"
+	        />
+	</LinearLayout>
