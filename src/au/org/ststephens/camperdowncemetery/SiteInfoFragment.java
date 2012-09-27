@@ -1,18 +1,21 @@
 package au.org.ststephens.camperdowncemetery;
 
+import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
 import android.widget.MediaController;
 import android.widget.TextView;
 
-public class SiteInfoFragment extends Fragment implements OnClickListener{
+public class SiteInfoFragment extends Fragment{
 	private Site site = null;
 	private static final String TAG = "SiteInfo";
 	private AudioPlayer audioPlayer;
@@ -51,15 +54,14 @@ public class SiteInfoFragment extends Fragment implements OnClickListener{
 		textView.setMovementMethod(new ScrollingMovementMethod());
 		
 		MediaController mediaController = new MediaController(getActivity()){
-			public void hide(){
-				super.hide();
-				View v=SiteInfoFragment.this.getView().findViewById(R.id.audio_controls_show);
-				v.setVisibility(View.VISIBLE);
+			@Override
+			public boolean dispatchKeyEvent(KeyEvent event) {
+				if(event.getKeyCode()==KeyEvent.KEYCODE_BACK){
+					((Activity) getActivity()).finish();
+				}
+				return super.dispatchKeyEvent(event);
 			}
 		};
-	    View showControls=siteView.findViewById(R.id.audio_controls_show);
-	    showControls.setOnClickListener(this);
-	    
 		MediaPlayer player=MediaPlayer.create(getActivity(), R.raw.hi);
 		audioPlayer=new AudioPlayer(player, mediaController, siteView);
 		return siteView;
@@ -67,17 +69,8 @@ public class SiteInfoFragment extends Fragment implements OnClickListener{
 	
 	@Override
 	public void onStop() {
-		super.onStop();
 		if(audioPlayer!=null) audioPlayer.finish();
+		super.onStop();
 	}
 
-	@Override
-	public void onClick(View v) {
-		if(v.getId()==R.id.audio_controls_show){
-			View showControls=getView().findViewById(R.id.audio_controls_show);
-			showControls.setVisibility(View.GONE);
-			audioPlayer.showControls();
-		}
-		
-	}
 }

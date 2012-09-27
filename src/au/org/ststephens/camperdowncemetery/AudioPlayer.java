@@ -10,13 +10,14 @@ public class AudioPlayer implements OnPreparedListener, MediaController.MediaPla
 	private MediaController mediaController;
 	private MediaPlayer mediaPlayer;
 	private View anchorView;
-	private Handler handler = new Handler();
+	private Handler handler;
 	
 	public AudioPlayer(MediaPlayer mediaPlayer, MediaController mediaController, View anchorView){
 		//Setup audio
 		this.mediaPlayer = mediaPlayer;
 		this.mediaController = mediaController;
 		this.anchorView = anchorView;
+		this.handler=new Handler();
 	    mediaPlayer.setOnPreparedListener(this);
 	    mediaPlayer.start();
 	}
@@ -28,8 +29,8 @@ public class AudioPlayer implements OnPreparedListener, MediaController.MediaPla
 	    
 	    handler.post(new Runnable() {
 	        public void run() {
-	          mediaController.setEnabled(true);
-	          mediaController.show();
+		          mediaController.setEnabled(true);
+		          mediaController.show(Integer.MAX_VALUE);//TODO: Not quite infinity, but close enough
 	        }
 	      });
 	}
@@ -39,6 +40,7 @@ public class AudioPlayer implements OnPreparedListener, MediaController.MediaPla
 	}
 	
 	public void finish(){
+		handler.removeCallbacksAndMessages(null);
 		mediaController.hide();
 	    mediaPlayer.stop();
 	    mediaPlayer.release();
