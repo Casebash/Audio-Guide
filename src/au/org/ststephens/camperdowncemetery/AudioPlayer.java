@@ -3,19 +3,21 @@ package au.org.ststephens.camperdowncemetery;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.MediaController;
 
 public class AudioPlayer implements OnPreparedListener, MediaController.MediaPlayerControl{
-	private MediaController mediaController;
+	public AudioController audioController;
 	private MediaPlayer mediaPlayer;
 	private View anchorView;
 	private Handler handler;
+	private boolean finishedWithMediaPlayer;
 	
-	public AudioPlayer(MediaPlayer mediaPlayer, MediaController mediaController, View anchorView){
+	public AudioPlayer(MediaPlayer mediaPlayer, AudioController audioController, View anchorView){
 		//Setup audio
 		this.mediaPlayer = mediaPlayer;
-		this.mediaController = mediaController;
+		this.audioController = audioController;
 		this.anchorView = anchorView;
 		this.handler=new Handler();
 	    mediaPlayer.setOnPreparedListener(this);
@@ -24,26 +26,31 @@ public class AudioPlayer implements OnPreparedListener, MediaController.MediaPla
 	
 	@Override
 	public void onPrepared(MediaPlayer mp) {
-		mediaController.setMediaPlayer(this);
-		mediaController.setAnchorView(anchorView);
+		audioController.setMediaPlayer(this);
+		audioController.setAnchorView(anchorView);
 	    
 	    handler.post(new Runnable() {
 	        public void run() {
-		          mediaController.setEnabled(true);
-		          mediaController.show(Integer.MAX_VALUE);//TODO: Not quite infinity, but close enough
+	        	audioController.setEnabled(true);
+	        	audioController.show(Integer.MAX_VALUE);//TODO: Not quite infinity, but close enough
 	        }
-	      });
+	    });
 	}
 	
 	public void showControls(){
-		mediaController.show();
+		audioController.show();
 	}
 	
 	public void finish(){
 		handler.removeCallbacksAndMessages(null);
-		mediaController.hide();
-	    mediaPlayer.stop();
-	    mediaPlayer.release();
+		if(audioController.isShown()){
+			audioController.realHide();
+		}
+		if(!finishedWithMediaPlayer){
+			mediaPlayer.reset();
+		    mediaPlayer.release();
+		    finishedWithMediaPlayer=true;
+		}
 	}
 	
 	@Override

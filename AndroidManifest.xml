@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="au.org.ststephens.camperdowncemetery"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0"
+    android:installLocation="preferExternal">
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -29,7 +30,7 @@
         </activity>
         <activity
             android:name=".SiteInfoActivity"
-            android:label="Site" >
+            android:label="Site">
         </activity>
     </application>
 

@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -18,7 +19,7 @@ import android.widget.TextView;
 public class SiteInfoFragment extends Fragment{
 	private Site site = null;
 	private static final String TAG = "SiteInfo";
-	private AudioPlayer audioPlayer;
+	public AudioPlayer audioPlayer;
 	
 	public Site getSite() {
 		return site;
@@ -33,11 +34,10 @@ public class SiteInfoFragment extends Fragment{
 	}
 	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		int siteId=getArguments().getInt("siteId");
 		site=MyApplication.getApp().getSiteById(siteId);
-
 	}
 
 	@Override
@@ -53,24 +53,21 @@ public class SiteInfoFragment extends Fragment{
 		textView.setText(site.description);
 		textView.setMovementMethod(new ScrollingMovementMethod());
 		
-		MediaController mediaController = new MediaController(getActivity()){
-			@Override
-			public boolean dispatchKeyEvent(KeyEvent event) {
-				if(event.getKeyCode()==KeyEvent.KEYCODE_BACK){
-					((Activity) getActivity()).finish();
-				}
-				return super.dispatchKeyEvent(event);
-			}
-		};
+		AudioController audioController = new AudioController(getActivity());
 		MediaPlayer player=MediaPlayer.create(getActivity(), R.raw.hi);
-		audioPlayer=new AudioPlayer(player, mediaController, siteView);
+		audioPlayer=new AudioPlayer(player, audioController, siteView);
 		return siteView;
 	}
 	
 	@Override
 	public void onStop() {
-		if(audioPlayer!=null) audioPlayer.finish();
+		finishing();
 		super.onStop();
+	}
+	
+	//Action needs to run before either activity or fragment closes
+	public void finishing(){
+		if(audioPlayer!=null) audioPlayer.finish();
 	}
 
 }
