@@ -5,10 +5,12 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 
 public class SiteInfoActivity extends FragmentActivity{
 	private SiteInfoFragment frag;
+	private int id;
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +23,8 @@ public class SiteInfoActivity extends FragmentActivity{
         }
         if (savedInstanceState == null) {
             // During initial setup, plug in the details fragment.
-        	frag=SiteInfoFragment.newInstance(getIntent().getIntExtra("id", 0));
+        	id=getIntent().getIntExtra("id", 0);
+        	frag=SiteInfoFragment.newInstance(id);
         	//Can place fragment directly - don't need layout
             getSupportFragmentManager().beginTransaction().add(android.R.id.content, frag).commit();
         }

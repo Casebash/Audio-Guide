@@ -5,6 +5,8 @@ import au.org.ststephens.camperdowncemetery.util.ResourceImageInitialiser;
 
 public class MyApplication extends Application{
 	private static MyApplication app;
+	private int id;
+	private int position;
 	public static final String TAG = "AudioGuide";
 	
 	private Site siteList[] = {
@@ -29,5 +31,17 @@ public class MyApplication extends Application{
     //Only call after onCreate
     public static MyApplication getApp() {
         return MyApplication.app;
+    }
+    
+    public void setLastAudio(int id, int position){
+    	this.id=id;
+    	this.position=position;
+    }
+    
+    public int getStartPosition(int id){
+    	if(this.id==id){
+    		return this.position;
+    	}
+    	return 0;
     }
 }

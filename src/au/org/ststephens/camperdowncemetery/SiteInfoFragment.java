@@ -17,8 +17,10 @@ import android.widget.MediaController;
 import android.widget.TextView;
 
 public class SiteInfoFragment extends Fragment{
+	private int siteId;
 	private Site site = null;
 	private static final String TAG = "SiteInfo";
+	private int previousPosition;
 	public AudioPlayer audioPlayer;
 	
 	public Site getSite() {
@@ -27,6 +29,7 @@ public class SiteInfoFragment extends Fragment{
 
 	public static SiteInfoFragment newInstance(int siteId) {
 		SiteInfoFragment f = new SiteInfoFragment();
+		f.siteId=siteId;
 		Bundle args = new Bundle();
 		args.putInt("siteId", siteId);
 		f.setArguments(args);
@@ -36,8 +39,9 @@ public class SiteInfoFragment extends Fragment{
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		int siteId=getArguments().getInt("siteId");
-		site=MyApplication.getApp().getSiteById(siteId);
+		Bundle bundle=getArguments();
+		previousPosition=bundle.getInt("position");
+		site=MyApplication.getApp().getSiteById(bundle.getInt("siteId"));
 	}
 
 	@Override
@@ -55,19 +59,28 @@ public class SiteInfoFragment extends Fragment{
 		
 		AudioController audioController = new AudioController(getActivity());
 		MediaPlayer player=MediaPlayer.create(getActivity(), R.raw.hi);
+		if(previousPosition==0){
+			MyApplication app=(MyApplication)getActivity().getApplication();
+			previousPosition=app.getStartPosition(siteId);
+		}
+		player.seekTo(previousPosition);
 		audioPlayer=new AudioPlayer(player, audioController, siteView);
 		return siteView;
 	}
 	
 	@Override
-	public void onStop() {
-		finishing();
-		super.onStop();
+	public void onSaveInstanceState(Bundle outState){
+		if(audioPlayer!=null){
+			int position=audioPlayer.getCurrentPosition();
+			outState.putInt("position", position);
+		}
 	}
 	
-	//Action needs to run before either activity or fragment closes
 	public void finishing(){
-		if(audioPlayer!=null) audioPlayer.finish();
+		if(audioPlayer!=null){
+			MyApplication app=(MyApplication)getActivity().getApplication();
+			app.setLastAudio(siteId, audioPlayer.getCurrentPosition());
+			audioPlayer.finish();
+		}
 	}
-
 }
