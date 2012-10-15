@@ -4,6 +4,7 @@ import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 
 public class SiteInfoActivity extends FragmentActivity{
@@ -27,8 +28,13 @@ public class SiteInfoActivity extends FragmentActivity{
     }
     
     @Override
+    public void onConfigurationChanged(Configuration newConfig){
+    	super.onConfigurationChanged(newConfig);
+    }
+    
+    @Override
     public void finish(){
-    	frag.finishing();
+    	if(frag!=null)frag.finishing();
     	super.finish();
     }
 }

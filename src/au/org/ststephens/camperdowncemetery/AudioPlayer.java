@@ -12,7 +12,6 @@ public class AudioPlayer implements OnPreparedListener, MediaController.MediaPla
 	private MediaPlayer mediaPlayer;
 	private View anchorView;
 	private Handler handler;
-	private boolean finishedWithMediaPlayer;
 	
 	public AudioPlayer(MediaPlayer mediaPlayer, AudioController audioController, View anchorView){
 		//Setup audio
@@ -46,10 +45,10 @@ public class AudioPlayer implements OnPreparedListener, MediaController.MediaPla
 		if(audioController.isShown()){
 			audioController.realHide();
 		}
-		if(!finishedWithMediaPlayer){
+		if(mediaPlayer!=null){
 			mediaPlayer.reset();
 		    mediaPlayer.release();
-		    finishedWithMediaPlayer=true;
+		    mediaPlayer=null;
 		}
 	}
 	
