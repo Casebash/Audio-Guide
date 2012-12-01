@@ -58,6 +58,12 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 		SiteAdapter adapter = new SiteAdapter(getActivity(), 0, MyApplication.getApp().getSites());
 		siteListTable.setAdapter(adapter);
 		siteListTable.setOnItemClickListener(this);
+		
+		//Prepare the map
+        TouchImageView img = (TouchImageView) mainView.findViewById(R.id.map);
+        img.setImageResource(R.drawable.cemetery);
+        img.setMaxZoom(4f);
+		
 		return mainView;
 	}
 	
