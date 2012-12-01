@@ -46,6 +46,12 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 		spec3.setContent(R.id.map);
 		spec3.setIndicator(r.getString(R.string.map_title));
 		tabs.addTab(spec3);
+		
+		//Set current tab
+		if(savedInstanceState!=null){
+			int startTab=savedInstanceState.getInt("currentTab");
+			tabs.setCurrentTab(startTab);
+		}
 
 		//Prepare the site list
 		ListView siteListTable = (ListView) mainView.findViewById(R.id.site_list);
@@ -71,6 +77,14 @@ public class MainFragment extends Fragment implements OnItemClickListener{
             findListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
             showSite(mCurCheckPosition);
         }
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		
+		TabHost tabs = (TabHost) getView().findViewById(R.id.tabhost);
+		outState.putInt("currentTab", tabs.getCurrentTab());
 	}
 	
 	public void showSite(int siteIndex){

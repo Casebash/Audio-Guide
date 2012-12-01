@@ -5,7 +5,12 @@
 		android:layout_height="fill_parent"
 		android:orientation="vertical">	
 	
-	 	<ImageView
+		<pl.polidea.coverflow.CoverFlow xmlns:coverflow="http://schemas.android.com/apk/res-auto"
+		coverflow:imageWidth="100dip" coverflow:imageHeight="150dip" coverflow:withReflection="true"
+		coverflow:imageReflectionRatio="0.2" coverflow:reflectionGap="2dip" android:id="@+id/siteImages"
+		android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5dip" />
+		
+	 	<!--ImageView
 		    android:layout_width="fill_parent"
 		    android:layout_height="0px"
 		    android:layout_weight="1"
@@ -13,7 +18,7 @@
 		    android:scaleType="fitCenter"
 		    android:contentDescription="@null"
 		    android:layout_margin="8dp"
-		    />
+		    /-->
 	    
 	    <TextView
 	        android:id="@+id/textView1"

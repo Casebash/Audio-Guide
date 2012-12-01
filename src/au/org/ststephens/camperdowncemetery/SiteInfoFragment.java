@@ -1,22 +1,21 @@
 package au.org.ststephens.camperdowncemetery;
 
-import android.app.Activity;
+import pl.polidea.coverflow.CoverFlow;
+import pl.polidea.coverflow.ReflectingImageAdapter;
+import pl.polidea.coverflow.ResourceImageAdapter;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
-import android.widget.MediaController;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
-public class SiteInfoFragment extends Fragment{
+public class SiteInfoFragment extends Fragment implements OnItemClickListener{
 	private int siteId;
 	private Site site = null;
 	private static final String TAG = "SiteInfo";
@@ -57,6 +56,13 @@ public class SiteInfoFragment extends Fragment{
 		textView.setText(site.description);
 		textView.setMovementMethod(new ScrollingMovementMethod());
 		
+        final CoverFlow siteImages = (CoverFlow) siteView.findViewById(R.id.siteImages);
+        
+        
+        ResourceImageAdapter adapter=new ResourceImageAdapter(getActivity(), new int[]{R.drawable.sample1, R.drawable.sample2});
+        BaseAdapter coverImageAdapter=new ReflectingImageAdapter(adapter);
+        siteImages.setAdapter(coverImageAdapter);
+		
 		AudioController audioController = new AudioController(getActivity());
 		MediaPlayer player=MediaPlayer.create(getActivity(), R.raw.hi);
 		if(previousPosition==0){
@@ -83,4 +89,10 @@ public class SiteInfoFragment extends Fragment{
 			audioPlayer.finish();
 		}
 	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		
+	}
 }
+

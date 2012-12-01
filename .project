@@ -3,6 +3,7 @@
 	<name>Audio Guide</name>
 	<comment></comment>
 	<projects>
+		<project>pl.polidea.coverflow</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
