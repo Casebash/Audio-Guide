@@ -25,6 +25,8 @@ public class SiteInfoActivity extends FragmentActivity{
             // During initial setup, plug in the details fragment.
         	id=getIntent().getIntExtra("id", 0);
         	frag=SiteInfoFragment.newInstance(id);
+        	String title=MyApplication.getApp().getSiteById(id).title;
+        	setTitle(title);
         	//Can place fragment directly - don't need layout
             getSupportFragmentManager().beginTransaction().add(android.R.id.content, frag).commit();
         }
