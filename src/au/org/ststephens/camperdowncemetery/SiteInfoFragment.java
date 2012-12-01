@@ -1,14 +1,18 @@
 package au.org.ststephens.camperdowncemetery;
 
+import pl.polidea.coverflow.AbstractCoverFlowImageAdapter;
 import pl.polidea.coverflow.CoverFlow;
 import pl.polidea.coverflow.ReflectingImageAdapter;
 import pl.polidea.coverflow.ResourceImageAdapter;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -20,6 +24,7 @@ public class SiteInfoFragment extends Fragment implements OnItemClickListener{
 	private Site site = null;
 	private static final String TAG = "SiteInfo";
 	private int previousPosition;
+	private int imageResources[];
 	public AudioPlayer audioPlayer;
 	
 	public Site getSite() {
@@ -57,10 +62,11 @@ public class SiteInfoFragment extends Fragment implements OnItemClickListener{
 		textView.setMovementMethod(new ScrollingMovementMethod());
 		
         final CoverFlow siteImages = (CoverFlow) siteView.findViewById(R.id.siteImages);
+        siteImages.setOnItemClickListener(this);
         
-        
-        ResourceImageAdapter adapter=new ResourceImageAdapter(getActivity(), new int[]{R.drawable.sample1, R.drawable.sample2});
-        BaseAdapter coverImageAdapter=new ReflectingImageAdapter(adapter);
+        imageResources=new int[]{R.drawable.sample1, R.drawable.sample2};
+        AbstractCoverFlowImageAdapter imageAdapter=new ResourceImageAdapter(getActivity(), imageResources);
+        BaseAdapter coverImageAdapter=new ReflectingImageAdapter(imageAdapter);
         siteImages.setAdapter(coverImageAdapter);
 		
 		AudioController audioController = new AudioController(getActivity());
@@ -92,7 +98,11 @@ public class SiteInfoFragment extends Fragment implements OnItemClickListener{
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		
+		Intent intent = new Intent();
+        intent.setClass(getActivity(), ImageActivity.class);
+        intent.putExtra("location", site.title);
+        intent.putExtra("image_id", imageResources[arg2]);
+        startActivity(intent);
 	}
 }
 
