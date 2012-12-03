@@ -77,7 +77,6 @@ public class MainFragment extends Fragment implements OnItemClickListener{
         if (savedInstanceState != null) {
             mCurCheckPosition = savedInstanceState.getInt("curChoice", 0);
         }
-        
 
         if (mDualPane) {
             findListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -95,12 +94,9 @@ public class MainFragment extends Fragment implements OnItemClickListener{
 	
 	public void showSite(int siteIndex){
     	Site s=MyApplication.getApp().getSites()[siteIndex];
-
         mCurCheckPosition = siteIndex;
-
-        if (mDualPane) {
+        /*if (mDualPane) {
             findListView().setItemChecked(siteIndex, true);
-
             SiteInfoFragment details = (SiteInfoFragment)
                     getFragmentManager().findFragmentById(R.id.site_info_main);
             if (details == null || details.getSite().id != s.id) {
@@ -112,14 +108,14 @@ public class MainFragment extends Fragment implements OnItemClickListener{
                 ft.commit();
             }
 
-        } else {
+        } else {*/
             // Otherwise we need to launch a new activity to display
             // the dialog fragment with selected text.
             Intent intent = new Intent();
             intent.setClass(getActivity(), SiteInfoActivity.class);
             intent.putExtra("id", s.id);
             startActivity(intent);
-        }
+        /*}*/
 	}
 
 	@Override

@@ -20,7 +20,6 @@ public class AudioPlayer implements OnPreparedListener, MediaController.MediaPla
 		this.anchorView = anchorView;
 		this.handler=new Handler();
 	    mediaPlayer.setOnPreparedListener(this);
-	    mediaPlayer.start();
 	}
 	
 	@Override
